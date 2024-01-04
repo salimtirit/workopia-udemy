@@ -29,7 +29,7 @@ function loadView($name)
 }
 
 /**
- * Load a view
+ * Load a partial
  * 
  * @param string $name
  * @return void
@@ -43,4 +43,32 @@ function loadPartial($name)
         return;
     }
     require $partialPath;
+}
+
+/**
+ * Inspect values
+ * 
+ * @param mixed $value
+ * @return void
+ */
+
+function inspect($value)
+{
+    echo '<pre>';
+    var_dump($value);
+    echo '</pre>';
+}
+
+/**
+ * Inspect values and die
+ * 
+ * @param mixed $value
+ * @return void
+ */
+
+function inspectAndDie($value)
+{
+    echo '<pre>';
+    die(var_dump($value));
+    echo '</pre>';
 }
