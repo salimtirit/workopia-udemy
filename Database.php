@@ -19,10 +19,13 @@ class Database
         }
     }
 
-    public function query($query)
+    public function query($query, $params = [])
     {
         try {
             $sth = $this->conn->prepare($query);
+            foreach ($params as $key => $value) {
+                $sth->bindValue(":$key", $value);
+            }
             $sth->execute();
             return $sth;
         } catch (PDOException $e) {
