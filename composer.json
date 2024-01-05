@@ -1,0 +1,16 @@
+{
+	"name": "salimtirit/workopia-udemy",
+	"description": "Job listing application. Following Udemy course.",
+	"authors": [
+		{
+			"name": "Salim Kemal Tirit",
+			"email": "salimkemal.tirit@vestel.com.tr"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Framework\\": "Framework/",
+			"App\\": "App/"
+		}
+	}
+}
