@@ -1,3 +1,6 @@
 workopia-theme
 config
 vendor
+/node_modules
+.env
+.vscode

@@ -8,8 +8,7 @@
         <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">Recent Jobs</div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <!-- Job Listing 1: Software Engineer -->
-            <?php for ($i = 0; $i < 3; $i++) : ?>
-                <?php $listing = $listings[$i]; ?>
+            <?php foreach ($listings as $listing) : ?>
                 <div class="rounded-lg shadow-md bg-white">
                     <div class="p-4">
                         <h2 class="text-xl font-semibold"><?= $listing['title'] ?></h2>
@@ -36,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-            <?php endfor; ?>
+            <?php endforeach; ?>
             <a href="/listings" class="block text-xl text-center">
                 <i class="fa fa-arrow-alt-circle-right"></i>
                 Show All Jobs
