@@ -85,3 +85,9 @@ function formatSalary($salary)
     if ($salary == 0 || is_null($salary)) return 'Not Disclosed';
     return '$' . number_format($salary, 0, '.', ',');
 }
+
+
+function sanitize($dirtyData)
+{
+    return htmlspecialchars(trim($dirtyData), FILTER_SANITIZE_SPECIAL_CHARS);
+}
