@@ -91,3 +91,15 @@ function sanitize($dirtyData)
 {
     return htmlspecialchars(trim($dirtyData), FILTER_SANITIZE_SPECIAL_CHARS);
 }
+
+/**
+ * Redirect to a path
+ *
+ * @param string $path
+ * @return void
+ */
+function redirect($path)
+{
+    header("Location: {$path}");
+    exit;
+}
