@@ -90,6 +90,14 @@ class ListingController
             }
         }
 
+        if (!empty($newListingData['salary']) && !Validation::validateNumber($newListingData['salary'])) {
+            $errors['salary'] = 'Salary must be a number';
+        }
+
+        if (!empty($newListingData['phone']) && !Validation::validatePhoneNumber($newListingData['phone'])) {
+            $errors['phone'] = 'Phone number is invalid';
+        }
+
         if (!empty($errors)) {
             loadView('listings/create', [
                 'errors' => $errors,
@@ -135,6 +143,9 @@ class ListingController
         }
 
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
+
+        // Set flash message
+        $_SESSION['success_message'] = 'Listing deleted successfully';
 
         redirect('/listings');
     }
