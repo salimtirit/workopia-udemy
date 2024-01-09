@@ -54,7 +54,7 @@ class Router
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         if ($requestMethod === 'POST') {
-            $requestMethod = strtoupper($_POST['_method']) ?? $requestMethod;
+            $requestMethod = $_POST['_method'] ?? $requestMethod;
         }
 
         foreach ($this->routes as $route) {
