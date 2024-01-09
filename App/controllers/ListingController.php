@@ -149,4 +149,109 @@ class ListingController
 
         redirect('/listings');
     }
+
+    public function edit($params)
+    {
+        $id = $params['id'] ?? '';
+
+        $params = [
+            'id' => $id
+        ];
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
+
+        if (!$listing) {
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        loadView('listings/edit', [
+            'listing' => $listing
+        ]);
+    }
+
+    public function update($params)
+    {
+        $id = $params['id'] ?? '';
+
+        $params = [
+            'id' => $id
+        ];
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
+
+        if (!$listing) {
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        $allowedFields = [
+            'title',
+            'description',
+            'salary',
+            'requirements',
+            'benefits',
+            'company',
+            'address',
+            'city',
+            'state',
+            'phone',
+            'email'
+        ];
+
+        $updatedValues = array_intersect_key($_POST, array_flip($allowedFields));
+
+        $updatedValues['user_id'] = 1;
+
+        $updatedValues = array_map('sanitize', $updatedValues);
+
+        $requiredFields = [
+            'title',
+            'description',
+            'city',
+            'state',
+            'email'
+        ];
+
+        $errors = [];
+
+        foreach ($requiredFields as $field) {
+            if (empty($updatedValues[$field]) || !Validation::validateString($updatedValues[$field])) {
+                $errors[$field] = ucfirst($field) . ' is required';
+            }
+        }
+
+        if (!empty($updatedValues['salary']) && !Validation::validateNumber($updatedValues['salary'])) {
+            $errors['salary'] = 'Salary must be a number';
+        }
+
+        if (!empty($updatedValues['phone']) && !Validation::validatePhoneNumber($updatedValues['phone'])) {
+            $errors['phone'] = 'Phone number is invalid';
+        }
+
+        if (!empty($errors)) {
+            loadView('listings/edit', [
+                'errors' => $errors,
+                'listing' => $updatedValues
+            ]);
+            return;
+        } else {
+
+            $fields = [];
+            foreach ($updatedValues as $key => $value) {
+                $fields[] = "" . $key . " = :" . $key;
+            }
+
+            $fields = implode(', ', $fields);
+
+            $query = "UPDATE listings SET $fields WHERE id = :id";
+
+            $updatedValues['id'] = $id;
+
+            $this->db->query($query, $updatedValues);
+
+            // Set flash message
+            $_SESSION['success_message'] = 'Listing updated successfully';
+
+            redirect('/listings/' . $id);
+        }
+    }
 }
