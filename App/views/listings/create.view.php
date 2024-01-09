@@ -22,40 +22,51 @@
                 </div>
             <?php endif ?>
             <div class="mb-4">
-                <input type="text" name="title" placeholder="Job Title" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['title'] ?? '' ?>" />
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Job Title</label>
+                <input type="text" name="title" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['title'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <textarea name="description" placeholder="Job Description" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['description'] ?? '' ?>"></textarea>
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Job Description</label>
+                <textarea name="description" class="w-full px-4 py-2 border rounded focus:outline-none"><?= $listing['description'] ?? '' ?></textarea>
             </div>
             <div class="mb-4">
-                <input type="text" name="salary" placeholder="Annual Salary" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['salary'] ?? '' ?>" />
+                <label for="salary" class="block text-gray-700 text-sm font-bold mb-2">Annual Salary</label>
+                <input type="text" name="salary" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['salary'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="requirements" placeholder="Requirements" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['requirements'] ?? '' ?>" />
+                <label for="requirements" class="block text-gray-700 text-sm font-bold mb-2">Requirements</label>
+                <input type="text" name="requirements" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['requirements'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="benefits" placeholder="Benefits" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['benefits'] ?? '' ?>" />
+                <label for="benefits" class="block text-gray-700 text-sm font-bold mb-2">Benefits</label>
+                <input type="text" name="benefits" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['benefits'] ?? '' ?>" />
             </div>
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Company Info & Location
             </h2>
             <div class="mb-4">
-                <input type="text" name="company" placeholder="Company Name" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['company'] ?? '' ?>" />
+                <label for="company" class="block text-gray-700 text-sm font-bold mb-2">Company Name</label>
+                <input type="text" name="company" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['company'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="address" placeholder="Address" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['address'] ?? '' ?>" />
+                <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address</label>
+                <input type="text" name="address" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['address'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="city" placeholder="City" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['city'] ?? '' ?>" />
+                <label for="city" class="block text-gray-700 text-sm font-bold mb-2">City</label>
+                <input type="text" name="city" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['city'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="state" placeholder="State" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['state'] ?? '' ?>" />
+                <label for="state" class="block text-gray-700 text-sm font-bold mb-2">State</label>
+                <input type="text" name="state" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['state'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="text" name="phone" placeholder="Phone" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['phone'] ?? '' ?>" />
+                <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+                <input type="text" name="phone" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['phone'] ?? '' ?>" />
             </div>
             <div class="mb-4">
-                <input type="email" name="email" placeholder="Email Address For Applications" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['email'] ?? '' ?>" />
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address For Applications</label>
+                <input type="email" name="email" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['email'] ?? '' ?>" />
             </div>
             <button class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">
                 Save
