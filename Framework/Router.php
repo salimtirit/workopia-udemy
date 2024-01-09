@@ -52,10 +52,12 @@ class Router
 
     public function route($uri)
     {
-
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        if ($requestMethod === 'POST') {
+            $requestMethod = strtoupper($_POST['_method']) ?? $requestMethod;
+        }
 
         foreach ($this->routes as $route) {
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
             $uriSegments = explode('/', trim($uri, '/'));
             $routeSegments = explode('/', trim($route['uri'], '/'));
 
