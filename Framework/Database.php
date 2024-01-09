@@ -37,4 +37,6 @@ class Database
             throw new PDOException($e->getMessage(), (int) $e->getCode());
         }
     }
+
+    //TODO: add more methods for CRUD operations
 }
