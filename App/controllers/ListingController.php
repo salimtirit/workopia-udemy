@@ -84,18 +84,22 @@ class ListingController
 
         $errors = [];
 
-        foreach ($requiredFields as $field) {
-            if (empty($newListingData[$field]) || !Validation::validateString($newListingData[$field])) {
-                $errors[$field] = ucfirst($field) . ' is required';
-            }
-        }
-
         if (!empty($newListingData['salary']) && !Validation::validateNumber($newListingData['salary'])) {
             $errors['salary'] = 'Salary must be a number';
         }
 
         if (!empty($newListingData['phone']) && !Validation::validatePhoneNumber($newListingData['phone'])) {
             $errors['phone'] = 'Phone number is invalid';
+        }
+
+        if (!empty($newListingData['email']) && !Validation::validateEmail($newListingData['email'])) {
+            $errors['email'] = 'Email is invalid';
+        }
+
+        foreach ($requiredFields as $field) {
+            if (empty($newListingData[$field]) || !Validation::validateString($newListingData[$field])) {
+                $errors[$field] = ucfirst($field) . ' is required';
+            }
         }
 
         if (!empty($errors)) {
