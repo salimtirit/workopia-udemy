@@ -200,6 +200,7 @@ class ListingController
         $updatedValues = array_intersect_key($_POST, array_flip($allowedFields));
 
         $updatedValues['user_id'] = 1;
+        $updatedValues['id'] = $id;
 
         $updatedValues = array_map('sanitize', $updatedValues);
 
@@ -244,7 +245,6 @@ class ListingController
 
             $query = "UPDATE listings SET $fields WHERE id = :id";
 
-            $updatedValues['id'] = $id;
 
             $this->db->query($query, $updatedValues);
 
