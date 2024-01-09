@@ -47,4 +47,18 @@ class Validation
         //TODO: better regex can be written for universal phone number validation
         return true;
     }
+
+    public static function validatePassword($value, $min = 8)
+    {
+        if (!is_string($value)) {
+            return false;
+        }
+        $length = strlen(trim($value));
+
+        // TODO: add more password validation rules and return not safe enough etc.
+        if ($length >= $min) {
+            return true;
+        }
+        return 'Password must be at least 8 characters long';
+    }
 }
