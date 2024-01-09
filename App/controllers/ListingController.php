@@ -73,6 +73,49 @@ class ListingController
 
         $newListingData = array_map('sanitize', $newListingData);
 
-        inspectAndDie($newListingData);
+
+        $requiredFields = [
+            'title',
+            'description',
+            'city',
+            'state',
+            'email'
+        ];
+
+        $errors = [];
+
+        foreach ($requiredFields as $field) {
+            if (empty($newListingData[$field]) || !Validation::validateString($newListingData[$field])) {
+                $errors[$field] = ucfirst($field) . ' is required';
+            }
+        }
+
+        if (!empty($errors)) {
+            loadView('listings/create', [
+                'errors' => $errors,
+                'listing' => $newListingData
+            ]);
+            return;
+        } else {
+
+            $fields = [];
+            $placeHolders = [];
+            foreach ($newListingData as $key => $value) {
+                if ($value === '') {
+                    $newListingData[$key] = null;
+                }
+                $fields[] = $key;
+                $placeHolders[] = ':' . $key;
+            }
+
+            $placeHolders = implode(', ', $placeHolders);
+            $fields = implode(', ', $fields);
+
+            $query = "INSERT INTO listings ({$fields}) VALUES ({$placeHolders})";
+
+            $this->db->query($query, $newListingData);
+
+            redirect('/listings');
+        }
     }
 }
