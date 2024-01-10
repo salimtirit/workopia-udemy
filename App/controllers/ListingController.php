@@ -219,7 +219,7 @@ class ListingController
 
         $updatedValues = array_intersect_key($_POST, array_flip($allowedFields));
 
-        $updatedValues['user_id'] = 1;
+        $updatedValues['user_id'] = Session::get('user')['id'];
         $updatedValues['id'] = $id;
 
         $updatedValues = array_map('sanitize', $updatedValues);
