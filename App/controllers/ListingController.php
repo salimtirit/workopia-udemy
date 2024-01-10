@@ -174,6 +174,11 @@ class ListingController
             return;
         }
 
+        if ($listing['user_id'] !== Session::get('user')['id']) {
+            ErrorController::unauthorized('You are not authorized to edit this listing');
+            return;
+        }
+
         loadView('listings/edit', [
             'listing' => $listing
         ]);
@@ -190,6 +195,11 @@ class ListingController
 
         if (!$listing) {
             ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        if ($listing['user_id'] !== Session::get('user')['id']) {
+            ErrorController::unauthorized('You are not authorized to edit this listing');
             return;
         }
 
