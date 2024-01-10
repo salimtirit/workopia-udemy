@@ -60,7 +60,32 @@ class AuthController
             return;
         }
 
-        // TODO: check if email already exists
+        $params = [
+            'email' => $_POST['email'],
+        ];
+
+        $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();
+
+        if ($user) {
+            $errors['email'] = 'Email already exists';
+            loadView('auth/register', [
+                'errors' => $errors,
+                'user' => $_POST
+            ]);
+            return;
+        }
+
+        $params = [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'city' => $_POST['city'] === '' ? NULL : $_POST['city'],
+            'state' => $_POST['state'] === '' ?  NULL : $_POST['state'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        ];
+        $query = 'INSERT INTO users (name, city, state, email, password) VALUES (:name, :city, :state, :email, :password)';
+        $this->db->query($query, $params);
+
+        redirect('/');
     }
 
     public function authenticate()
