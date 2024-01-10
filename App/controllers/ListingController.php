@@ -147,6 +147,11 @@ class ListingController
             return;
         }
 
+        if ($listing['user_id'] !== Session::get('user')['id']) {
+            ErrorController::unauthorized('You are not authorized to delete this listing');
+            return;
+        }
+
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
 
         // Set flash message
