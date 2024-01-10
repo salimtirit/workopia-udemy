@@ -15,7 +15,7 @@ class ErrorController
         ]);
     }
 
-    public static function unothorized($message = "You are not authorized to access this resource")
+    public static function unauthorized($message = "You are not authorized to access this resource")
     {
         http_response_code(403);
         loadView('error', [
