@@ -274,4 +274,42 @@ class ListingController
             redirect('/listings/' . $id);
         }
     }
+
+    public function search()
+    {
+        $keywords = $_GET['keywords'] ?? '';
+        $location = $_GET['location'] ?? '';
+
+        $keywords = sanitize($keywords);
+        $location = sanitize($location);
+
+        $params = [
+            'keywords' => '%' . $keywords . '%',
+            'location' => '%' . $location . '%'
+        ];
+
+        $queryBase = 'SELECT * FROM listings WHERE ';
+        $queryKeywords = '(title LIKE :keywords OR description LIKE :keywords OR requirements LIKE :keywords OR benefits LIKE :keywords OR company LIKE :keywords OR tags LIKE :keywords)';
+        $queryLocation = '(city LIKE :location OR state LIKE :location)';
+
+        if ($keywords && $location) {
+            $query = $queryBase . $queryKeywords . ' AND ' . $queryLocation;
+        } else if ($keywords) {
+            $query = $queryBase . $queryKeywords;
+        } else if ($location) {
+            $query = $queryBase . $queryLocation;
+        } else {
+            redirect('/');
+            return;
+        }
+
+        $listings = $this->db->query($query, $params)->fetchAll();
+
+        // inspectAndDie($listings);
+        loadView('listings/index', [
+            'listings' => $listings,
+            'keywords' => $keywords,
+            'location' => $location
+        ]);
+    }
 }

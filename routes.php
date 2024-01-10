@@ -4,6 +4,7 @@ $router->get('/', 'HomeController@index');
 $router->get('/listings', 'ListingController@index');
 $router->get('/listings/create', 'ListingController@create', ['user']);
 $router->get('/listings/edit/{id}', 'ListingController@edit', ['user']);
+$router->get('/listings/search', 'ListingController@search');
 $router->get('/listings/{id}', 'ListingController@show');
 $router->post('/listings', 'ListingController@store', ['user']);
 $router->put('/listings/{id}', 'ListingController@update', ['user']);
